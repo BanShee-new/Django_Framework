@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} index {% endblock %}
+
+{% block header %}
+    <h3>Список всех клиентов (перейдя по ссылке получите все заказы клиента)</h3>
+{% endblock %}
+
+{% block main %}
+    {% for client in clients %}
+        <a href="{% url 'show_client_orders' client.pk %}">Заказы Client № {{ client.pk }} <br></a>
+    {% endfor %}
+{% endblock %}
+
+{% block footer %}
+<br>
+ <h3>Список всех клиентов (перейдя по ссылке получите заказы клиента за определенный период времени)</h3>
+    {% for client in clients %}
+        <a href="{% url 'list_goods_period_of_time' 7 client.pk %}">
+            Заказы Client № {{ client.pk }} за последние 7 дней <br></a>
+        <a href="{% url 'list_goods_period_of_time' 30 client.pk %}">
+            Заказы Client № {{ client.pk }} за последние 30 дней <br></a>
+        <a href="{% url 'list_goods_period_of_time' 365 client.pk %}">
+            Заказы Client № {{ client.pk }} за последние 365 дней <br></a>
+<br>
+    {% endfor %}
+{% endblock %}

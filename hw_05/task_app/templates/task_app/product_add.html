@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block header %}
+<h2>{{ title }}</h2>
+{% endblock %}
+
+{% block main %}
+<h3>{{ message }}</h3>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Сохранить">
+
+<!--    Ниже (необязательный код) flash сообщения, если надо (ul-li)-->
+    <ul>
+        {% if messages %}
+        <li>
+            {% for message in messages %}
+                    {% if message.tags %}
+                        {{ message.tags }}
+                    {% endif %}
+                {{ message }}
+            {% endfor %}
+        </li>
+        {% endif %}
+    </ul>
+</form>
+
+{% endblock %}
+
+{% block footer %}
+    <h3><a href="{% url 'index' %}"> Назад </a></h3>
+{% endblock %}

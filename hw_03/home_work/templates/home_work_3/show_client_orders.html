@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Client orders {% endblock %}
+
+{% block header %}
+    <h2>Приветствуем вас, {{ name }} !</h2>
+{% endblock %}
+
+{% block main %}
+    <h3>У вас имеется {{ count }} заказ(ов). </h3>
+
+    {% for order in orders %}
+    <h4> Заказ(id): {{ order.pk }} <br></h4>
+    <h4> Продукты в заказе: <br></h4>
+
+        {% for i in order.products.values %}
+            <p> {{ i.product_name }} </p>
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

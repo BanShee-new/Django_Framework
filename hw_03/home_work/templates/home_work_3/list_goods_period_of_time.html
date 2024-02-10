@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Client orders {% endblock %}
+
+{% block header %}
+    <h2>Приветствуем вас, {{ name }} !</h2>
+{% endblock %}
+
+{% block main %}
+
+    <h3>У вас имеется {{ count }} заказ(ов). За прошедшие {{ days }} дней: </h3>
+
+    {% if orders %}
+        <h4> В период с {{ range_days }} вы заказали товаров: <br></h4>
+
+        {% for order in orders %}
+              {% for i in order.products.values %}
+                  <p> Имя товара: {{ i.product_name }} </p>
+                  <p> Описание: {{ i.description }} </p>
+                  <p> Дата и время заказа: {{ i.date_ordered }} </p>
+                  <p> Цена: {{ i.price }} </p><br>
+              {% endfor %}
+        {% endfor %}
+
+    {% else %}
+        <h4> У вас нет заказов за этот период. <br></h4>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

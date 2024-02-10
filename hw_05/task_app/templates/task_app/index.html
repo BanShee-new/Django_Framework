@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} index {% endblock %}
+{% load static %}
+
+{% block header %}
+<h2> Home Work 5 </h2>
+<h3><a href="http://127.0.0.1:8000/admin/">Админка (admin/admin@mail.ru в учебных целях)</a></h3>
+{% endblock %}
+
+{% block main %}
+<h3><a href="{% url 'add_product' %}">Добавить товары</a></h3>
+<h3><a href="{% url 'update_product' %}">Редактировать товары</a></h3>
+<h3><a href="{% url 'show_clients' %}">Показать всех клиентов</a></h3>
+<h3><a href="{% url 'show_products' %}">Показать все товары</a></h3>
+{% endblock %}
+
+{% block footer %}
+
+{% if products %}
+    <h4> Продукты в базе: </h4>
+    {% for product in products %}
+        Продукт:     {{ product.product_name }}  <br>
+        Описание:   {{ product.description }} <br>
+        Цена: {{ product.price }}   <br>
+                {% if product.product_image %}
+                        Фото: <img src="{{ product.product_image.url }}" alt="{{ product.product_image }}"> <br>
+                {% endif %}
+<br>
+    {% endfor %}
+{% endif %}
+
+{% if clients %}
+    <h4> Клиенты в базе: </h4>
+    {% for client in clients %}
+        Имя:     {{ client.name }}  <br>
+        Почта:   {{ client.email }} <br>
+        Номер: {{ client.number_phone }}   <br>
+        Адрес: {{ client.address }}   <br>
+        Зарегистрирован: {{ client.registration_date }}   <br>
+    <br>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
